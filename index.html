@@ -169,14 +169,14 @@
             const board = document.getElementById("gameBoard");
             board.innerHTML = "";
 
-            // Criar pares de cartas
-            cardValues = shuffle(Array.from({ length: 18 }, (_, i) => i).flatMap(x => [x, x]));
+            // Criar pares de cartas (10 fotos, total de 20 cartas)
+            const cardValues = shuffle(Array.from({ length: 10 }, (_, i) => i).flatMap(x => [x, x]));
 
-            for (let i = 0; i < 36; i++) {
+            for (let i = 0; i < 20; i++) {
                 const card = document.createElement("div");
                 card.classList.add("card", "hidden");
                 card.dataset.value = cardValues[i];
-                card.id = `${String.fromCharCode(65 + Math.floor(i / 6))}${i % 6 + 1}`;
+                card.id = `${String.fromCharCode(65 + Math.floor(i / 5))}${i % 5 + 1}`; // Organiza em linhas de 5 cartas
 
                 const img = document.createElement("img");
                 img.src = `imagens/img${cardValues[i] + 1}.jpg`;
@@ -186,8 +186,14 @@
                 card.addEventListener("click", () => revealCard(card));
                 board.appendChild(card);
             }
+
+            // Ajustar CSS do tabuleiro para organizar os cards
+            board.style.display = "grid";
+            board.style.gridTemplateColumns = "repeat(5, 1fr)"; // 5 colunas
+            board.style.gridGap = "10px"; // Espaço entre os cards
         }
 
+        // Função para embaralhar as cartas
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -195,6 +201,8 @@
             }
             return array;
         }
+
+
 
         function revealCard(card) {
             if (!card.classList.contains("hidden") || revealedCards.length === 2) return;
