@@ -96,6 +96,29 @@
             z-index: 1000;
             display: none;
         }
+        /* Responsivo: Ajusta para layout horizontal em telas pequenas */
+@media (max-width: 768px) {
+    #gameBoard {
+        grid-template-columns: repeat(20, 1fr); /* Todos os 20 cards em uma linha */
+        grid-auto-rows: 150px; /* Define altura fixa para os cards */
+        overflow-x: auto; /* Adiciona rolagem horizontal */
+    }
+
+    #gameBoard::-webkit-scrollbar {
+        height: 8px; /* Barra de rolagem menor */
+    }
+
+    #gameBoard::-webkit-scrollbar-thumb {
+        background: #888; /* Cor da barra de rolagem */
+        border-radius: 10px;
+    }
+
+    #gameBoard::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Cor ao passar o mouse */
+    }
+}
+}
+}
     </style>
 </head>
 
